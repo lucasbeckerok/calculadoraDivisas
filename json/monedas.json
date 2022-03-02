@@ -1,0 +1,17 @@
+[
+    {
+        "moneda": "Dolar",
+        "sigla": "USD",
+        "precio": 220
+    },
+    {
+        "moneda": "Euro",
+        "sigla": "EUR",
+        "precio": 220
+    },
+    {
+        "moneda": "Libra",
+        "sigla": "GBP",
+        "precio": 220
+    }
+]

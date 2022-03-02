@@ -1,10 +1,18 @@
 //--Clase de objeto constructor
-
 class Moneda {
     constructor(moneda, sigla, precio){
         this.moneda = moneda;
         this.sigla = sigla;
         this.precio = parseInt(precio);
+    }
+}
+
+//Clase para usar en Storage
+class Resultado {
+    constructor(moneda,valor, convertido){
+        this.moneda = moneda;
+        this.valor = valor;
+        this.convertido = convertido;
     }
 }
 
@@ -48,18 +56,25 @@ function cotizar() {
         let resultadoDolar = monto / monedas[0].precio;
         let resDolar = resultadoDolar.toFixed(2);
         $("#mi-ul").append(`<li><h5>$${monto} ARS es igual a $${+resDolar} USD<h5></li>`);
-
-        
+        //storage
+        let result = new Resultado("Dolar",monto,resultadoDolar);
+        localStorage.setItem("ConversiónDolar", JSON.stringify(result));
     }
     else if (document.getElementById("euro").checked) {
         let resultadoEuro = monto / monedas[1].precio;
         let resEuro = resultadoEuro.toFixed(2);
         $("#mi-ul").append(`<li><h5>$${monto} ARS es igual a $${+resEuro} EUR</h5></li>`);
+        //storage
+        let result = new Resultado("Euro",monto,resultadoDolar);
+        localStorage.setItem("ConversiónEuro", JSON.stringify(result));
     }
     else if (document.getElementById("libra").checked) {
         let resultadoLibra = monto / monedas[2].precio;
         let resLibra = resultadoLibra.toFixed(2);
         $("#mi-ul").append(`<li><h5>$${monto} ARS es igual a $${+resLibra} GBP</h5></li>`);
+        //storage
+        let result = new Resultado("Libra",monto,resultadoDolar);
+        localStorage.setItem("ConversiónLibra", JSON.stringify(result));
     }
     else {
         $("#mi-ul").append(`<h5><b>&#x26D4;Error!</b> Moneda no Seleccionada</h5>`);
@@ -102,20 +117,12 @@ function ocultarMiDiv() {
 function mostrarMiDiv() {
     $('.animate-0').fadeIn();
 };
-//----- Ajax and JSON. 
 
-// const localJson = 'json/monedas.json'
-// $.getJSON(localJson,function(responsive, status){
-//     if(status == "success"){
-//         for (let monedas of responsive){
-//             monedas.push(monedas)
-//         }
-//     } else{
-//         console.log('algo salio mal')
-//     }
-// })
-// const monedasJson = JSON.stringify(monedas);
-// localStorage.setItem('datos', monedasJson);
-// const monedasGuardadoEnJson = localstorage.getItem('datos');
-// const MonedasObj = JSON.parse(monedasGuardadoEnJson);
-// console.log(MonedasObj);
+// --Json
+const localJson = '../json/monedas.json'
+
+$.getJSON(localJson)
+
+const monedasJson = JSON.stringify(monedas);
+
+localStorage.setItem(monedasJson, localJson);
