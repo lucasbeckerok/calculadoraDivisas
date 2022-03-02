@@ -31,7 +31,7 @@ h2{
   font-family:Arial, Helvetica, sans-serif;
   font-size: 1.7em;
   font-weight: bold;
-  text-shadow: 1px 1px 2px black;
+  text-shadow: 2px 2px 2px black;
   color:white;
   margin-top: 25px;
 }
@@ -73,25 +73,15 @@ table {
   line-height: 1.5em;
   color: black;
 }
-button {
-  margin: 1.7em;
-}
+
 .containerConversor {
   padding: 10px 20px 25px 20px;
   background-color: greenyellow;
-  margin: 30px;
+  margin: 50px;
   font-size: 1.1em;
   border-radius:15px;
   overflow: hidden;
   box-shadow: 8px 8px 50px 13px rgba(66, 68, 90, 1);
-}
-.containerConversor p {
-  margin:15px;
-}
-
-.containerResultado {
-  background-color: #eeee;
-  margin: 20px;
 }
 
 .botones {
@@ -107,4 +97,8 @@ button {
 
 .animate-0 {
   padding: 20px;
+}
+
+#mi-ul {
+  list-style-type: none;
 }

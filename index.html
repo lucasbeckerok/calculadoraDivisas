@@ -17,40 +17,58 @@
     <h1>Bienvenido a su Casa de Cambio</h1>
     <img src="./img/portada.png" alt="">
 
-    <div class="containerConversor">
-      <h2>Calculadora</h2>
-      <form>
+    <div>
 
-        <h5>Seleccione la moneda a convertir</p>
-
-        <input type="radio" name="cambio" id="dolar">Dolar
-        <input type="radio" name="cambio" id="euro">Euro
-        <input type="radio" name="cambio" id="libra">Libra
-
-        <h5>Ingrese el monto en ARS</p>
-
-        <input type="number" id="monto" min="1" max="100000">
-        
-        <input id="boton" value="Cotizar" type="button" onclick="cotizar()">
-
-      </form>
-
-      <div class="containerResultado" style="border-radius:15px;">
-      <ul id="mi-ul">
-      </ul>
-      </div>
-
+      <h2>Cotizaciones Principales</h2>
+      <h2 id="fecha"></h2>
+      
     </div>
 
-    <h2>Cotizaciones Principales</h2>
-    <h2 id="fecha"></h2>
-    
+    <div class="containerConversor">
+
+      <h2>Conversor</h2>
+      
+      <form>
+
+        <h4>1. Seleccione la moneda a convertir</h4>
+
+        <h5>
+        <input class="form-check-input" type="radio" name="cambio" id="dolar">
+        Dolar
+        <input class="form-check-input" type="radio" name="cambio" id="euro">
+        Euro
+        <input class="form-check-input" type="radio" name="cambio" id="libra">
+        Libra
+       </h5>
+
+        <h4>2. Ingrese el monto en ARS</h4>
+
+        
+        $ <input type="number" id="monto" min="1" max="100000">
+        <input class="btn btn-primary"id="boton" value="Cotizar" type="button" onclick="cotizar()"> <button type="button" class="btn btn-secondary" onclick="limpiar()">Limpiar</button>
+
+      </form>
+    </div>
+
+    <div class="animate-1" id="containerAlert">
+      <div class="alert alert-success">
+        <div class="containerResultado">
+          <h5> &#x2705; Resultado:</h5>
+         <ul id="mi-ul">
+           <li></li>
+         </ul>
+        </div>
+        <button class="btn btn-warning" onClick="history.go(0);">Reiniciar</button>
+      </div>
+    </div>
+
     <!--Jquery con animacion-->
 
     <div>
-      <button class="botones" onclick="mostrarMiDiv()">Mostrar tabla</button>
+      <h2>Tabla de monedas</h2>
+      <button class="btn btn-primary" onclick="mostrarMiDiv()">Mostrar</button>
 
-      <button class="botones" onclick="ocultarMiDiv()">Ocultar tabla</button>
+      <button class="btn btn-primary" onclick="ocultarMiDiv()">Ocultar</button>
     </div>
 
     <!--mostrar/ocultar tabla-->

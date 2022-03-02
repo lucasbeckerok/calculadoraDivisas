@@ -12,7 +12,8 @@ let fecha = document.getElementById('fecha');
 let boton = document.getElementById('boton');
 let cotizador = document.getElementById('cotizador');
 let tablaTotal = document.getElementById("tablaTotal");
-// Fin DOM
+
+let containerResultado = document.getElementById("containerResultado");
 
 //Array monedas
 let monedas = [];
@@ -29,37 +30,40 @@ monedas.push(new Moneda("Cardano","ADA","1"));
 //Fecha
 const meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 const f = new Date();
-//fecha de hoy
 let fechaCompleta = "Hoy " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear();
-// fecha en HTML
+//Fecha DOM
 fecha.innerHTML = fechaCompleta;
 
 function cotizar() {
-    
+
+    aparecerAlert();
     const monto = document.getElementById('monto').value;
 
     if (document.getElementById("dolar").checked) {
         let resultadoDolar = monto / monedas[0].precio;
         let resDolar = parseInt(resultadoDolar.toFixed(2));
-        $("#mi-ul").append(`<li><b>Resultado:</b> ${monto} ARS es igual a ${resDolar} USD</li>`);
+        $("#mi-ul").append(`<li><h6>$ ${monto} ARS es igual a ${resDolar} USD<h6></li>`);
     }
     else if (document.getElementById("euro").checked) {
         let resultadoEuro = monto / monedas[1].precio;
         let resEuro = parseInt(resultadoEuro.toFixed(2));
-        $("#mi-ul").append(`<li><b>Resultado:</b> ${monto} ARS es igual a ${+resEuro} EUR</li>`);
+        $("#mi-ul").append(`<li><h6>$ ${monto} ARS es igual a ${+resEuro} EUR</h6></li>`);
     }
     else if (document.getElementById("libra").checked) {
         let resultadoLibra = monto / monedas[2].precio;
         let resLibra = parseInt(resultadoLibra.toFixed(2));
-        $("#mi-ul").append(`<li><b>Resultado:</b>  ${monto}ARS es igual a ${+resLibra} GBP</li>`);
+        $("#mi-ul").append(`<li><h6>$ ${monto}ARS es igual a ${+resLibra} GBP</h6></li>`);
     }
     else {
-        $("#mi-ul").append(`<b>Debes completar correctamente todos los campos!</b>`);
+        $("#mi-ul").append(`<h5><b>Error!</b>Seleccione la moneda a convertir</h5><br>`);
     }
 }
 
-// Recorrido array de tabla de monedas
+function limpiar() {
+    monto = document.getElementById("monto").value="";
+}
 
+// Recorrido array de tabla de monedas
 for (let monedaTabla of monedas) {
     $("#app").append(`
     <tr>
@@ -71,8 +75,16 @@ for (let monedaTabla of monedas) {
     `);
 }
 
-//-------- Jquery animaciones ----------------
+// JQuery animaciones
 
+//Container Resultado
+$("#containerAlert").hide();
+
+function aparecerAlert() {
+    $('.animate-1').fadeIn();
+};
+
+// Tabla Total
 $("#tablaTotal").hide();
 
 function ocultarMiDiv() {
@@ -82,7 +94,7 @@ function mostrarMiDiv() {
     $('.animate-0').fadeIn();
 };
 
-//----- Clase 14. AJax en el proyecto -------
+// Ajax and JSON. 
 
 // const localJson = 'json/monedas.json'
 
