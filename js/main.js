@@ -1,3 +1,5 @@
+//--Clase de objeto constructor
+
 class Moneda {
     constructor(moneda, sigla, precio){
         this.moneda = moneda;
@@ -6,16 +8,16 @@ class Moneda {
     }
 }
 
-// DOM 
+//-DOM 
 let padre = document.getElementById('container');
 let fecha = document.getElementById('fecha');
+let monto = document.getElementById('monto');
 let boton = document.getElementById('boton');
 let cotizador = document.getElementById('cotizador');
 let tablaTotal = document.getElementById("tablaTotal");
-
 let containerResultado = document.getElementById("containerResultado");
 
-//Array monedas
+//---Array monedas
 let monedas = [];
 monedas.push(new Moneda("Dolar", "USD","220"));
 monedas.push(new Moneda("Euro","EUR","240"));
@@ -27,43 +29,49 @@ monedas.push(new Moneda("Binance Coin","BNB","350"));
 monedas.push(new Moneda("USD Coin","USDC","1"));
 monedas.push(new Moneda("Cardano","ADA","1"));
 
-//Fecha
+//----Fecha
 const meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 const f = new Date();
 let fechaCompleta = "Hoy " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear();
-//Fecha DOM
+//-Fecha DOM
 fecha.innerHTML = fechaCompleta;
 
+//---Funciones de botones 'cotizar' y 'limpiar'
+
+//boton cotizar
 function cotizar() {
 
     aparecerAlert();
-    const monto = document.getElementById('monto').value;
+    monto = document.getElementById('monto').value;
 
     if (document.getElementById("dolar").checked) {
         let resultadoDolar = monto / monedas[0].precio;
-        let resDolar = parseInt(resultadoDolar.toFixed(2));
-        $("#mi-ul").append(`<li><h6>$ ${monto} ARS es igual a ${resDolar} USD<h6></li>`);
+        let resDolar = resultadoDolar.toFixed(2);
+        $("#mi-ul").append(`<li><h5>$${monto} ARS es igual a $${+resDolar} USD<h5></li>`);
+
+        
     }
     else if (document.getElementById("euro").checked) {
         let resultadoEuro = monto / monedas[1].precio;
-        let resEuro = parseInt(resultadoEuro.toFixed(2));
-        $("#mi-ul").append(`<li><h6>$ ${monto} ARS es igual a ${+resEuro} EUR</h6></li>`);
+        let resEuro = resultadoEuro.toFixed(2);
+        $("#mi-ul").append(`<li><h5>$${monto} ARS es igual a $${+resEuro} EUR</h5></li>`);
     }
     else if (document.getElementById("libra").checked) {
         let resultadoLibra = monto / monedas[2].precio;
-        let resLibra = parseInt(resultadoLibra.toFixed(2));
-        $("#mi-ul").append(`<li><h6>$ ${monto}ARS es igual a ${+resLibra} GBP</h6></li>`);
+        let resLibra = resultadoLibra.toFixed(2);
+        $("#mi-ul").append(`<li><h5>$${monto} ARS es igual a $${+resLibra} GBP</h5></li>`);
     }
     else {
-        $("#mi-ul").append(`<h5><b>Error!</b>Seleccione la moneda a convertir</h5><br>`);
+        $("#mi-ul").append(`<h5><b>&#x26D4;Error!</b> Moneda no Seleccionada</h5>`);
     }
 }
 
+//-boton Limpiar
 function limpiar() {
     monto = document.getElementById("monto").value="";
 }
 
-// Recorrido array de tabla de monedas
+//---Recorrido array de tabla de monedas
 for (let monedaTabla of monedas) {
     $("#app").append(`
     <tr>
@@ -75,7 +83,7 @@ for (let monedaTabla of monedas) {
     `);
 }
 
-// JQuery animaciones
+//----JQuery animaciones
 
 //Container Resultado
 $("#containerAlert").hide();
@@ -84,20 +92,19 @@ function aparecerAlert() {
     $('.animate-1').fadeIn();
 };
 
-// Tabla Total
+//---Tabla Total
 $("#tablaTotal").hide();
 
+//-botones de tabla
 function ocultarMiDiv() {
     $('.animate-0').fadeOut();
 }
 function mostrarMiDiv() {
     $('.animate-0').fadeIn();
 };
-
-// Ajax and JSON. 
+//----- Ajax and JSON. 
 
 // const localJson = 'json/monedas.json'
-
 // $.getJSON(localJson,function(responsive, status){
 //     if(status == "success"){
 //         for (let monedas of responsive){
@@ -107,14 +114,8 @@ function mostrarMiDiv() {
 //         console.log('algo salio mal')
 //     }
 // })
-
-const monedasJson = JSON.stringify(monedas);
-
-localStorage.setItem('datos', monedasJson);
-
-
-const monedasGuardadoEnJson = localstorage.getItem('datos');
-
-const MonedasObj = JSON.parse(monedasGuardadoEnJson);
-
-console.log(MonedasObj);
+// const monedasJson = JSON.stringify(monedas);
+// localStorage.setItem('datos', monedasJson);
+// const monedasGuardadoEnJson = localstorage.getItem('datos');
+// const MonedasObj = JSON.parse(monedasGuardadoEnJson);
+// console.log(MonedasObj);
